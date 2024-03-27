@@ -1,0 +1,77 @@
+#include <iostream>
+#include <Windows.h>
+#include <ctime>
+#include <string>
+constexpr auto RESET = "\033[0m";
+constexpr auto CYAN = "\033[36m";
+constexpr auto BLUE = "\033[34m";
+constexpr auto MAGENTA = "\033[35m";
+constexpr auto BOLD = "\033[1m";
+constexpr auto GREEN = "\033[32m";
+constexpr auto YELLOW = "\033[33m";
+constexpr auto RED = "\033[31m";
+
+using namespace std;
+int main() {
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+    srand(time(NULL));
+    string words[] = { "district", "church", "circus", "gallery","palace" };
+    string words2[] = {"rctsitid", "rchhcu", "rscicu", "elrgaly", "alaepc"};
+    string HINT[] = { "hint", "hint", "hint", "hint", "hint" };
+    cout <<"\t\t\t\t\t\t\t" <<CYAN<< "Welcome to Word Jumble!" <<RESET<< endl<<endl;
+    cout << "Unscramble the letters to make a word." << endl;
+    cout << "Enter " <<BLUE<< "hint " << RESET<<"for a hint. You have only got "<<BLUE<<"three hints." << RESET<<endl;
+    cout << "Enter " <<MAGENTA<< "quit " <<RESET<< "to quit the game." << endl<<endl;
+    char a;
+    string myWord;
+    bool b=false;
+    int i = 0;
+    int w = 0;
+    string quit = "quit";
+    do {
+        string word = words[i];
+        string word2 = words2[i];
+        string hint = HINT[i];
+        cout << "The jumble is: " <<BOLD<<CYAN<< word2 <<RESET<< endl;
+        do {
+            cout << "Your guess: ";
+            cin >> myWord;
+                if (myWord == word) {
+                    cout << GREEN << "YOUR WIN!" << RESET << endl;
+                    break;
+                }
+            
+             
+                if (myWord == hint ) {
+                    if (w <= 2) {
+                        cout << YELLOW << w + 1 << RESET << " letter: " << YELLOW << word[w] << RESET << endl;
+                    }
+                        if (w>=2) {
+                            cout <<YELLOW<< "This was the last clue!)" <<RESET<< endl;
+                       }  
+                        w++;
+                    b = false;
+                }
+           
+                if (myWord == quit) {
+                    break;
+                }
+                else if (myWord!=word && myWord!=hint && myWord!=quit) {
+                    cout <<RED<< "Try again h_h" <<RESET<< endl;
+                }
+            
+        } while (true);
+        w = 0;
+        i++;
+        if (myWord == words[4]) {
+            cout <<BOLD<<YELLOW<< "That was the last word;)" <<RESET<< endl;
+            break;
+        }       
+        cout << "Shall we continue ?(Y or N)" << endl;
+        cin >> a;
+    } while (a == 'Y' || a == 'y');
+    system("pause");
+    return 0;
+
+}
