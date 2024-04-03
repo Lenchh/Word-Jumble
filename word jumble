@@ -23,13 +23,18 @@ int main() {
     cout << "Unscramble the letters to make a word." << endl;
     cout << "Enter " <<BLUE<< "hint " << RESET<<"for a hint. You have only got "<<BLUE<<"three hints." << RESET<<endl;
     cout << "Enter " <<MAGENTA<< "quit " <<RESET<< "to quit the game." << endl<<endl;
+    cout << "You'll also be awarded " << GREEN << "points" << RESET << " for correct answers." << endl << endl;
+    cout << "One correct answer without hints is " << GREEN << "20 points." << RESET << endl << endl;
+    cout << "One " << GREEN << "hint" << RESET << " removes " << GREEN << "3 points." << RESET << endl << endl;
+    cout << "Will you be able to score"<<GREEN<<" 100 points"<<RESET<<" ? :)" << endl << endl;
     char a;
-    string myWord;
+    string myWord; 
     bool b=false;
     int i = 0;
     int w = 0;
     string quit = "quit";
-    do {
+    int count = 0;
+  do {
         string word = words[i];
         string word2 = words2[i];
         string hint = HINT[i];
@@ -39,6 +44,7 @@ int main() {
             cin >> myWord;
                 if (myWord == word) {
                     cout << GREEN << "YOUR WIN!" << RESET << endl;
+                    count += 20;
                     break;
                 }
             
@@ -46,6 +52,8 @@ int main() {
                 if (myWord == hint ) {
                     if (w <= 2) {
                         cout << YELLOW << w + 1 << RESET << " letter: " << YELLOW << word[w] << RESET << endl;
+                        
+                            count -= 3;
                     }
                         if (w>=2) {
                             cout <<YELLOW<< "This was the last clue!)" <<RESET<< endl;
@@ -64,13 +72,31 @@ int main() {
         } while (true);
         w = 0;
         i++;
+        cout << "That's how many points you scored: " <<BLUE<< count <<RESET<< endl;
         if (myWord == words[4]) {
+            if (count < 60) {
+                cout <<YELLOW<<"NOT BAD;)" <<RESET<< endl;
+            }
+            else if (count>=60 && count<75) {
+                cout <<BOLD<<YELLOW<< "GOOD:)" <<RESET<< endl;
+            }
+            else if (count>=75 && count<90) {
+                cout <<GREEN<< "EXCELLENT!!" <<RESET<< endl;
+            }
+            else if (count>=90 && count<100) {
+                cout <<GREEN<< "AWESOME" <<RESET<< endl;
+            }
+            else if (count == 100) {
+                cout <<BOLD<<GREEN<< "Well done! You really did it :)" <<RESET<< endl;
+            }
             cout <<BOLD<<YELLOW<< "That was the last word;)" <<RESET<< endl;
             break;
-        }       
-        cout << "Shall we continue ?(Y or N)" << endl;
+        }   
+       
+       cout << "Shall we continue ?(Y or N)" << endl;
         cin >> a;
     } while (a == 'Y' || a == 'y');
+    
     system("pause");
     return 0;
 
